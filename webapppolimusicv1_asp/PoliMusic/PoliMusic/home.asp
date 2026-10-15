@@ -1,0 +1,17 @@
+<!--#include file="includes/core.asp"-->
+<!--#include file="includes/layout.asp"-->
+<%
+RequiereLogin
+Dim rsCanciones, rsAlbumes, rsPlaylists, rsArtistas, sql
+Set rsCanciones = Consultar("SELECT TOP 12 s.ID_SONG, s.SONG_NAME, s.SONG_PATH, s.PLAYS, ISNULL(a.ARTIST_NAME+' '+ISNULL(a.ARTIST_LASTNAME,''),'Artista PoliMusic') AS ARTIST_NAME, ISNULL(ar.ARTIST_IMAGE,'') AS ARTIST_IMAGE FROM TBL_SONG s LEFT JOIN TBL_PLAYER p ON p.ID_SONG=s.ID_SONG LEFT JOIN TBL_ARTIST a ON a.ID_ARTIST=p.ID_ARTIST LEFT JOIN TBL_ARTIST ar ON ar.ID_ARTIST=p.ID_ARTIST ORDER BY s.PLAYS DESC, s.ID_SONG")
+Set rsAlbumes = Consultar("SELECT TOP 8 ID_ALBUM,TITLE_ALBUM,RELEASE_YEAR,ALBUM_IMAGE_PATH FROM TBL_ALBUM ORDER BY ID_ALBUM DESC")
+Set rsPlaylists = Consultar("SELECT TOP 6 ID_PLAYLIST,TITLE,PHOTO FROM TBL_PLAYLIST WHERE TYPE=0 OR ID_USER=" & SqlInt(UsuarioId()) & " ORDER BY ID_PLAYLIST DESC")
+Set rsArtistas = Consultar("SELECT TOP 8 ID_ARTIST,ARTIST_NAME,ARTIST_LASTNAME,ARTIST_IMAGE FROM TBL_ARTIST ORDER BY ID_ARTIST")
+RenderHeader "Inicio", "home"
+%>
+<section class="hero"><div class="hero-copy"><div class="eyebrow">PoliMusic · Tu plataforma</div><h1><%=Html(Saludo())%>, <%=Html(UsuarioNombre())%>.</h1><p>Descubre tus canciones favoritas, crea playlists y escucha la música de la Escuela Politécnica Nacional en una experiencia morada.</p><a class="btn" href="buscar.asp"><%Icon "search"%> Explorar musica</a></div></section>
+<div class="section-head"><h2>Escuchadas recientemente</h2><a href="buscar.asp">Ver todo</a></div>
+<div class="card-grid"><% Do While Not rsCanciones.EOF %><% Dim portadaCancion, nombreArtista %><% portadaCancion = Portada(rsCanciones("ARTIST_IMAGE") & ""): nombreArtista = rsCanciones("ARTIST_NAME") & "" %><article class="music-card js-track-card"><img class="cover" src="<%=Html(IIf(portadaCancion="",APP_PATH&COVER_DEFAULT,portadaCancion))%>" onerror="this.src='<%=BASE%>assets/img/cover-default.svg'" alt=""><div class="card-title"><%=Html(rsCanciones("SONG_NAME"))%></div><div class="card-sub"><%=Html(nombreArtista)%></div><button class="card-play js-play-track" type="button" data-song-id="<%=rsCanciones("ID_SONG")%>" data-title="<%=Html(rsCanciones("SONG_NAME"))%>" data-artist="<%=Html(nombreArtista)%>" data-src="<%=Html(AudioRuta(rsCanciones("SONG_PATH")))%>" data-cover="<%=Html(portadaCancion)%>"><%Icon "play"%></button></article><% rsCanciones.MoveNext: Loop %></div>
+<div class="section-head"><h2>Albumes para ti</h2><a href="biblioteca.asp">Tu biblioteca</a></div><div class="card-grid"><% Do While Not rsAlbumes.EOF %><a class="music-card" href="album.asp?id=<%=rsAlbumes("ID_ALBUM")%>"><img class="cover" src="<%=Html(Portada(rsAlbumes("ALBUM_IMAGE_PATH")))%>" onerror="this.src='<%=BASE%>assets/img/cover-default.svg'" alt=""><div class="card-title"><%=Html(rsAlbumes("TITLE_ALBUM"))%></div><div class="card-sub"><%=Html(rsAlbumes("RELEASE_YEAR"))%> · Album</div></a><% rsAlbumes.MoveNext: Loop %></div>
+<div class="section-head"><h2>Playlists destacadas</h2><a href="biblioteca.asp#playlists">Ver todas</a></div><div class="playlist-grid"><% Do While Not rsPlaylists.EOF %><a class="playlist-card" href="playlist.asp?id=<%=rsPlaylists("ID_PLAYLIST")%>"><img src="<%=Html(Portada(rsPlaylists("PHOTO")))%>" onerror="this.src='<%=BASE%>assets/img/cover-default.svg'" alt=""><div><h3><%=Html(rsPlaylists("TITLE"))%></h3><p>Playlist PoliMusic</p></div></a><% rsPlaylists.MoveNext: Loop %></div>
+<% RenderFooter %>
