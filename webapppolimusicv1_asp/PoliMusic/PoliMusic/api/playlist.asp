@@ -39,5 +39,5 @@ ElseIf action = "remove" Then
         On Error GoTo 0
     End If
 End If
-JsonOut ok, """message"":""" & Replace(msg, """", "\"") & """"
+JsonOut ok, """message"":""" & Replace(msg, """", "\""") & """"
 %>

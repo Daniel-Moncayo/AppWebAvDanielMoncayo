@@ -2,12 +2,14 @@
 '=====================================================================
 '  PoliMusic - nucleo
 '  Unico archivo que deben incluir las paginas junto con layout.asp.
+'  (IIS procesa los #include aunque esten comentados, por eso los
+'   ejemplos se escriben sin la sintaxis completa de la directiva)
 '  Ejemplo (pagina en la raiz):
-'      <!--#include file="includes/core.asp"-->
-'      <!--#include file="includes/layout.asp"-->
+'      include file = includes/core.asp
+'      include file = includes/layout.asp
 '  Ejemplo (pagina dentro de /admin):
-'      <!--#include file="../includes/core.asp"-->
-'      <!--#include file="../includes/layout.asp"-->
+'      include file = ../includes/core.asp
+'      include file = ../includes/layout.asp
 '
 '  Los cuatro incluidos viven en el mismo directorio, por lo que las
 '  rutas relativas siempre resuelven igual sin importar quien los llame.
