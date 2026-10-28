@@ -1,0 +1,50 @@
+# ==== Visual Studio ====
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# ==== Build (.NET / ASP.NET) ====
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+*.pdb
+*.cache
+*.tlog
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+
+# Publicación
+PublishProfiles/
+*.pubxml
+*.publishproj
+*.azurePubxml
+
+# ==== Herramientas / IDEs ====
+.vscode/
+.idea/
+*.swp
+_ReSharper*/
+*.DotSettings.user
+
+# ==== Office (archivos temporales/bloqueo) ====
+~$*
+
+# ==== Sistema operativo ====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
