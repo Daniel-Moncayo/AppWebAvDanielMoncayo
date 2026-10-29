@@ -1,0 +1,87 @@
+# =====================================================================
+# .gitignore - SlnAppPoliMusic (Visual Studio / ASP.NET .NET Framework)
+# Evita subir archivos generados, de usuario o de paquetes NuGet.
+# =====================================================================
+
+# ==== Visual Studio (configuracion local / cache) ====
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.userprefs
+
+# ==== Compilacion ====
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+*.pdb
+*.ilk
+*.obj
+*.cache
+*.tlog
+*.log
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+
+# ==== NuGet (se restauran solos al compilar) ====
+packages/
+!**/[Pp]ackages/build/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# ==== Publicacion ====
+PublishProfiles/
+*.pubxml
+*.publishproj
+*.azurePubxml
+PublishScripts/
+
+# ==== Pruebas / cobertura ====
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+
+# ==== IIS Express / temporales de ASP.NET ====
+.vs/config/applicationhost.config
+App_Data/*.mdf
+App_Data/*.ldf
+*.tmp
+*.temp
+
+# ==== Herramientas / IDEs ====
+.vscode/
+.idea/
+*.swp
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ==== Office (archivos temporales/bloqueo) ====
+~$*
+
+# ==== Sistema operativo ====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
